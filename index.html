@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CivilSkills — Kit de Skills para Engenharia Civil no Claude</title>
+<meta name="description" content="Kit com skills e comandos prontos para configurar o Claude em tarefas de engenharia civil: projeto estrutural, laudos, orçamento, fundações e planejamento de obra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'SEU_PIXEL_ID_AQUI');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=SEU_PIXEL_ID_AQUI&ev=PageView&noscript=1" /></noscript>
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+<style>
+  :root{
+    --navy-deep:#12151b;
+    --navy:#1b2029;
+    --navy-2:#262d39;
+    --teal:#e8ab1f;
+    --teal-dark:#b8830e;
+    --orange:#e8572c;
+    --orange-2:#ff7a49;
+    --bg:#f6f4ef;
+    --card:#ffffff;
+    --border:#e7e1d4;
+    --text:#181a1e;
+    --muted:#61646c;
+    --gradient-hero: linear-gradient(160deg, var(--navy-2) 0%, var(--navy-deep) 70%);
+    --gradient-electric: linear-gradient(135deg, var(--teal) 0%, var(--navy-2) 130%);
+    --gradient-orange: linear-gradient(135deg, var(--orange-2) 0%, var(--orange) 100%);
+    --shadow-teal: 0 18px 40px -14px rgba(232,171,31,.45);
+    --shadow-orange: 0 16px 32px -10px rgba(232,87,44,.55);
+    --shadow-elegant: 0 20px 50px -20px rgba(18,21,27,.25);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
+  h1,h2,h3,h4{font-family:'Sora',sans-serif;line-height:1.15}
+  img{max-width:100%;display:block}
+  a{text-decoration:none;color:inherit}
+  svg.ico{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  section{padding:80px 0}
+  .center{text-align:center}
+  .muted{color:var(--muted)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(232,171,31,.5);background:rgba(232,171,31,.12);color:var(--navy);padding:7px 16px;border-radius:999px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.16em}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:16px 32px;border-radius:10px;font-size:15px;border:none;cursor:pointer;transition:filter .2s,transform .2s}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn-orange{background:var(--gradient-orange);color:#3a1400;box-shadow:var(--shadow-orange)}
+  .btn-outline{background:transparent;border:2px solid rgba(255,255,255,.4);color:#fff}
+  .btn-block{width:100%}
+  .arrow{transition:transform .2s}
+  .btn:hover .arrow{transform:translateX(3px)}
+  @keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(232,87,44,.55)}50%{box-shadow:0 0 0 16px rgba(232,87,44,0)}}
+  .pulse-btn{animation:pulseGlow 1.7s ease-in-out infinite;border:none}
+
+  /* Top bar */
+  .topbar{background:var(--navy-deep);color:#e9dfc4;text-align:center;padding:10px 16px;font-size:13px;font-weight:600}
+  .topbar strong{color:var(--teal)}
+
+  /* Header / hero */
+  header{position:relative;overflow:hidden;background:var(--gradient-hero);color:#fff}
+  header::before{content:"";position:absolute;inset:0;opacity:.07;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse at 50% 25%, black 30%, transparent 75%)}
+  .hero{position:relative;padding:56px 0 90px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+  .logo-chip{display:inline-flex;margin-bottom:26px}
+  .logo-chip img{height:46px;width:auto;border-radius:10px}
+  .hero h1{font-size:2.7rem;font-weight:800;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--teal)}
+  .hero p.lead{margin-top:20px;max-width:560px;color:rgba(255,255,255,.78);font-size:1.08rem}
+  .hero p.lead strong{color:#fff}
+  .hero-actions{margin-top:32px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+  .fine{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.55)}
+  .fine2{font-size:12px;color:rgba(255,255,255,.5)}
+  .hero-visual{position:relative}
+  .hero-visual .glow{position:absolute;inset:-40px;background:var(--gradient-electric);opacity:.25;filter:blur(60px);z-index:0}
+  .hero-card{position:relative;z-index:1;border:1px solid rgba(232,171,31,.35);background:rgba(255,255,255,.05);padding:16px;border-radius:22px;backdrop-filter:blur(6px)}
+  .hero-card img{border-radius:14px}
+  .price-flag{position:absolute;bottom:-18px;left:-18px;display:flex;align-items:center;gap:12px;border:1px solid rgba(232,171,31,.4);background:#1a1f14;padding:12px 18px;border-radius:14px;box-shadow:var(--shadow-elegant)}
+  .price-flag .icon{display:grid;place-items:center;width:42px;height:42px;border-radius:10px;background:var(--gradient-electric);font-size:18px}
+  .price-flag .label b{display:block;font-size:13px}
+  .price-flag .label span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.55)}
+
+  /* stats */
+  .stats{background:var(--card);border-bottom:1px solid var(--border)}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+  .stats-grid > div{display:flex;align-items:center;justify-content:center;gap:14px;padding:34px 12px;border-left:1px solid var(--border)}
+  .stats-grid > div:first-child{border-left:none}
+  .stats-grid .stat-ico{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(232,171,31,.14);color:var(--teal-dark);font-size:20px}
+  .stats-grid b{font-family:'Sora',sans-serif;font-size:1.9rem;font-weight:800;display:block}
+  .stats-grid span{display:block;margin-top:2px;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);text-align:left}
+
+  /* marquee */
+  .marquee-wrap{overflow:hidden;background:linear-gradient(90deg,var(--navy-2),var(--navy-deep));padding:16px 0;border-top:1px solid rgba(232,171,31,.15);border-bottom:1px solid rgba(232,171,31,.15)}
+  .marquee{display:flex;width:max-content;gap:40px;animation:scroll 36s linear infinite;white-space:nowrap}
+  .marquee span{color:rgba(255,255,255,.85);font-family:'Sora',sans-serif;font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px}
+  .marquee span::before{content:"◆";color:var(--teal);font-size:8px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* problem + comparison */
+  .problem{background:var(--card)}
+  .problem .wrap{max-width:820px}
+  .problem h2{font-size:2.1rem;text-align:center}
+  .problem-body{margin-top:26px;font-size:1.05rem}
+  .problem-body p{margin-bottom:16px;color:var(--muted)}
+  .problem-body p strong{color:var(--text)}
+  .compare{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .compare-col{border-radius:16px;padding:26px}
+  .compare-col.no{background:#fbf2ee;border:1px dashed #e2b7a4}
+  .compare-col.yes{background:#fbf6e7;border:1px solid rgba(232,171,31,.5)}
+  .compare-col h4{font-size:1rem;display:flex;align-items:center;gap:8px}
+  .compare-col.no h4{color:#b5502c}
+  .compare-col.yes h4{color:var(--teal-dark)}
+  .compare-col ul{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+  .compare-col li{list-style:none;display:flex;gap:8px;font-size:13.5px;color:var(--text)}
+  .compare-col.no li::before{content:"›";color:#c46a45;font-weight:800}
+  .compare-col.yes li::before{content:"›";color:var(--teal-dark);font-weight:800}
+
+  /* skills accordion */
+  .skills-head{max-width:640px;margin:0 auto}
+  .accordion{margin-top:40px;display:flex;flex-direction:column;gap:14px}
+  .acc-item{border:1px solid var(--border);border-radius:16px;background:var(--card);overflow:hidden}
+  .acc-item[open]{border-color:rgba(232,171,31,.5)}
+  .acc-item summary{cursor:pointer;list-style:none;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .acc-item summary::-webkit-details-marker{display:none}
+  .acc-left{display:flex;align-items:center;gap:16px}
+  .acc-num{font-family:'Sora',sans-serif;font-weight:800;color:var(--teal-dark);font-size:13px;flex:none;width:30px}
+  .acc-left h3{font-size:1.15rem}
+  .acc-left p{font-size:12px;color:var(--muted);margin-top:2px}
+  .acc-right{display:flex;align-items:center;gap:14px;flex:none}
+  .acc-count{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-dark);border:1px solid rgba(232,171,31,.4);padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .acc-plus{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;font-size:14px;color:var(--navy);transition:transform .2s}
+  .acc-item[open] .acc-plus{transform:rotate(45deg)}
+  .acc-body{padding:0 24px 22px;display:flex;flex-direction:column}
+  .skill-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--border)}
+  .skill-row .s-ico{flex:none;width:30px;height:30px;border-radius:9px;background:rgba(232,171,31,.14);color:var(--teal-dark);display:grid;place-items:center}
+  .skill-row h4{font-size:13.5px;font-weight:700}
+  .skill-row p{font-size:12px;color:var(--muted);margin-top:2px}
+  .skills-cta{margin-top:44px;border-radius:16px;border:1px solid rgba(232,171,31,.4);background:var(--card);padding:32px;text-align:center}
+  .skills-cta p{font-weight:700;font-size:1.1rem}
+
+  /* testimonials */
+  .testi{background:var(--bg)}
+  .testi-viewport{overflow:hidden;margin-top:44px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+  .testi-track{display:flex;gap:20px;width:max-content;animation:testiScroll 38s linear infinite}
+  .testi-viewport:hover .testi-track{animation-play-state:paused}
+  @keyframes testiScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .testi-card{flex:0 0 320px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;text-align:left}
+  .testi-rating{display:inline-flex;align-items:center;gap:6px;background:rgba(232,87,44,.1);color:var(--orange);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:800}
+  .testi-card p.quote{margin-top:16px;font-size:14px;color:var(--text)}
+  .testi-person{margin-top:18px;display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding-top:16px}
+  .testi-person img{width:42px;height:42px;border-radius:10px;object-fit:cover}
+  .testi-person b{display:block;font-size:13px}
+  .testi-person span{display:block;font-size:11px;color:var(--muted)}
+
+  /* prompts as chips */
+  .prompts{background:var(--card)}
+  .chip-cloud{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:40px;max-width:820px;margin-left:auto;margin-right:auto}
+  .chip-cloud span{display:inline-flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);padding:10px 18px;border-radius:999px;font-size:13.5px;font-weight:600;color:var(--navy)}
+  .chip-cloud span svg{color:var(--teal-dark)}
+
+  /* timeline steps */
+  .timeline{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+  .timeline::before{content:"";position:absolute;top:23px;left:8%;right:8%;height:2px;background:var(--border)}
+  .t-step{position:relative;text-align:center;padding:0 18px}
+  .t-node{width:46px;height:46px;border-radius:50%;background:var(--card);border:2px solid var(--teal);color:var(--teal-dark);display:grid;place-items:center;margin:0 auto;font-family:'Sora',sans-serif;font-weight:800;position:relative;z-index:1}
+  .t-step h4{margin-top:18px;font-size:1.05rem}
+  .t-step p{margin-top:8px;font-size:13px;color:var(--muted)}
+
+  /* bonus alternating rows */
+  .bonus{background:var(--navy-deep);color:#fff}
+  .bonus .eyebrow{background:var(--teal);border:2px solid var(--teal);color:#241a02;font-weight:800}
+  .bonus h2{font-size:2.3rem;font-weight:800}
+  .bonus h2 em{font-style:normal;color:var(--teal)}
+  .bonus p.lead{color:rgba(255,255,255,.65);max-width:560px;margin:14px auto 0}
+  .bonus-rows{margin-top:50px;display:flex;flex-direction:column;gap:6px}
+  .bonus-row{display:grid;grid-template-columns:200px 1fr;gap:36px;align-items:center;padding:34px 0;border-bottom:1px solid rgba(255,255,255,.1);position:relative}
+  .bonus-row:last-child{border-bottom:none}
+  .bonus-row.rev{grid-template-columns:1fr 200px}
+  .bonus-row.rev .b-media{order:2}
+  .bonus-row .b-bignum{position:absolute;right:0;top:10px;font-family:'Sora',sans-serif;font-weight:800;font-size:4.5rem;color:rgba(255,255,255,.05);line-height:1}
+  .bonus-row.rev .b-bignum{right:auto;left:0}
+  .b-media{width:200px;height:240px;flex:none;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border-radius:16px;overflow:hidden}
+  .b-media img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:10px;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+  .b-text .b-index{display:block;font-family:'Sora',sans-serif;font-weight:800;color:var(--teal);font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .b-text .pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:rgba(232,171,31,.16);color:var(--teal);padding:4px 12px;border-radius:999px}
+  .b-text h4{margin-top:12px;font-size:1.25rem}
+  .b-text p{margin-top:10px;font-size:13.5px;color:rgba(255,255,255,.65);max-width:480px}
+
+  /* conteudos */
+  .conteudos-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;margin-top:44px}
+  .conteudos-track::-webkit-scrollbar{height:8px}
+  .conteudos-track::-webkit-scrollbar-thumb{background:var(--border);border-radius:8px}
+  .cont-card{flex:0 0 250px;scroll-snap-align:start;background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .cont-card img{aspect-ratio:941/1672;object-fit:cover;width:100%}
+  .cont-card .body{padding:16px}
+  .cont-card .num{font-size:11px;font-weight:800;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.1em}
+  .cont-card h4{margin-top:6px;font-size:1rem}
+  .cont-card p{margin-top:6px;font-size:12.5px;color:var(--muted)}
+
+  /* pricing */
+  .offer{position:relative;overflow:hidden;background:var(--gradient-hero);color:#fff}
+  .offer h2{font-size:2.3rem;font-weight:800}
+  .offer h2 em{font-style:normal;color:var(--teal)}
+  .offer > .wrap > p{max-width:600px;margin:14px auto 0;color:rgba(255,255,255,.7)}
+  .pricing-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:26px;margin-top:52px;align-items:stretch}
+  .price-card{position:relative;border-radius:20px;padding:34px;background:rgba(255,255,255,.04);border:2px solid rgba(255,255,255,.14);display:flex;flex-direction:column;text-align:left}
+  .price-card.featured{background:rgba(255,255,255,.06);border:2px solid var(--teal);box-shadow:var(--shadow-teal)}
+  .price-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gradient-electric);color:#241a02;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.14em;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .price-card h3{font-size:1.3rem}
+  .price-card .desc{color:rgba(255,255,255,.6);font-size:13px;margin-top:6px}
+  .price-value{margin-top:22px;display:flex;align-items:flex-end;gap:6px}
+  .price-value .cur{font-size:1.3rem;color:rgba(255,255,255,.7);padding-bottom:6px}
+  .price-value .num{font-family:'Sora',sans-serif;font-weight:800;font-size:3.4rem;line-height:1;color:var(--teal)}
+  .price-note{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px}
+  .price-pills{margin-top:22px;flex:1;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  .price-pills span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:7px 12px;border-radius:999px}
+  .price-pills span.off{opacity:.35;text-decoration:line-through}
+  .price-pills span svg{color:var(--teal);flex:none}
+  .price-card .btn{margin-top:26px}
+  .btn-teal{background:var(--gradient-electric);color:#241a02;box-shadow:var(--shadow-teal)}
+
+  /* guarantee */
+  .guarantee-card{max-width:640px;margin:0 auto;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:44px;box-shadow:var(--shadow-elegant)}
+  .guarantee-badge{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--gradient-electric);font-size:30px;margin:0 auto;box-shadow:var(--shadow-teal)}
+  .guarantee-card h3{margin-top:20px;font-size:1.4rem}
+  .guarantee-card p{margin-top:10px;color:var(--muted)}
+
+  /* closing statement */
+  .statement{background:var(--card)}
+  .statement .wrap{max-width:680px}
+  .statement h2{font-size:1.6rem}
+  .statement p{margin-top:16px;color:var(--muted);font-size:1.02rem}
+  .statement p.strong{color:var(--text);font-weight:600}
+
+  /* faq */
+  .faq{background:var(--bg)}
+  .faq-list{max-width:760px;margin:44px auto 0;display:flex;flex-direction:column;gap:10px}
+  details.q{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0;overflow:hidden}
+  details.q summary{cursor:pointer;padding:18px 22px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;font-size:14px;gap:12px}
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary .qplus{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;font-size:12px;color:var(--teal-dark);transition:transform .2s}
+  details.q[open] summary .qplus{transform:rotate(45deg)}
+  details.q p{padding:0 22px 20px;color:var(--muted);font-size:13.5px}
+
+  /* final cta */
+  .final-cta{background:var(--gradient-hero);color:#fff}
+  .final-cta h2{font-size:2.3rem;font-weight:800;max-width:720px;margin:0 auto}
+  .final-cta h2 em{font-style:normal;color:var(--teal)}
+  .final-cta p{margin-top:16px;color:rgba(255,255,255,.65);max-width:520px;margin-left:auto;margin-right:auto}
+  .final-cta .btn{margin-top:30px}
+
+  footer{background:var(--card);border-top:1px solid var(--border);padding:48px 0}
+  .foot-logo{display:flex;align-items:center;gap:10px}
+  .foot-logo img{height:28px;border-radius:6px}
+  footer p{margin-top:16px;font-size:11.5px;color:var(--muted);max-width:760px;line-height:1.6}
+  footer .copy{margin-top:22px;font-size:11.5px;color:var(--muted)}
+
+  @media(max-width:960px){
+    .hero-grid{display:flex;flex-direction:column}
+    .hero-grid > div:first-child{display:contents}
+    .logo-chip{order:1}
+    .hero h1{order:2}
+    .hero p.lead{order:3}
+    .hero-visual{order:4;margin-top:30px}
+    .hero-actions{order:5;margin-top:30px}
+    .price-flag{position:static;margin:14px auto 0;max-width:max-content}
+    .compare{grid-template-columns:1fr}
+    .timeline{grid-template-columns:1fr;gap:34px}
+    .timeline::before{display:none}
+    .bonus-row,.bonus-row.rev{grid-template-columns:1fr;text-align:center}
+    .bonus-row.rev .b-media{order:0}
+    .b-media{margin:0 auto}
+    .b-text p{max-width:none}
+    .pricing-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:600px){
+    .hero h1{font-size:2.05rem}
+    section{padding:60px 0}
+    .acc-right .acc-count{display:none}
+    .stats-grid>div{flex-direction:column;gap:6px;padding:22px 6px}
+    .stats-grid span{text-align:center}
+    .stats-grid .stat-ico{width:36px;height:36px;font-size:16px}
+    .stats-grid b{font-size:1.5rem}
+    .stats-grid span{font-size:9px}
+  }
+</style>
+</head>
+<body>
+
+<svg style="display:none">
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-13h-7l1-7z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1M10 21v-4h4v4"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L14.7 6.3z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="m9 14-2 8 5-3 5 3-2-8"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M4 12v9h16v-9"/><path d="M12 8c-2 0-4-1.5-4-3.5S9 2 10.5 2 12 4.5 12 8ZM12 8c2 0 4-1.5 4-3.5S13.5 2 12 2 12 4.5 12 8Z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></symbol>
+</svg>
+
+<div class="topbar">🏗️ <strong>NOVO:</strong> o kit CivilSkills chegou — skills e comandos para engenharia civil dentro do Claude</div>
+
+<header>
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div>
+        <div class="logo-chip"><img src="assets/logo.png" alt="CivilSkills — Skills para Claude"></div>
+        <h1>Seus projetos de engenharia civil não precisam nascer do zero em cada <em>memorial ou laudo.</em></h1>
+        <p class="lead">O CivilSkills é um kit de instruções (skills) e comandos prontos para configurar o Claude em tarefas técnicas do escritório — projeto estrutural, laudos, orçamento, fundações e planejamento de obra. <strong>Você entra com os dados do projeto e recebe um rascunho estruturado para revisar e ajustar.</strong></p>
+        <div class="hero-actions">
+          <a href="#oferta" class="btn btn-orange">Eu quero o CivilSkills <span class="arrow">→</span></a>
+          <p class="fine">Acesso digital imediato · Pagamento único · Garantia de 7 dias</p>
+          <p class="fine2">A licença de uso do Claude é contratada à parte, diretamente com a Anthropic.</p>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="glow"></div>
+        <div class="hero-card">
+          <img src="assets/hero-bundle.webp" alt="Kit CivilSkills — skills, planilhas e guias para engenharia civil">
+          <div class="price-flag">
+            <span class="icon"><svg class="ico" style="width:20px;height:20px"><use href="#i-building"/></svg></span>
+            <span class="label"><b>Kit completo de skills e comandos</b><span>Acesso digital imediato</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stats-grid">
+    <div><span class="stat-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><b>50</b><span>Skills técnicas</span></div></div>
+    <div><span class="stat-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><b>1000</b><span>Comandos prontos</span></div></div>
+    <div><span class="stat-ico"><svg class="ico"><use href="#i-gift"/></svg></span><div><b>4</b><span>Materiais bônus</span></div></div>
+  </div>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<section class="problem">
+  <div class="wrap">
+    <h2>Entre entender o projeto e redigir o documento, sobra pouco tempo pra pensar.</h2>
+    <div class="problem-body">
+      <p>Boa parte do expediente de um escritório de engenharia civil não vai para o cálculo — vai para formatar planilha, revisar texto de memorial e responder mensagem de cliente e de obra.</p>
+      <p><strong>E quando finalmente sobra um tempo para olhar o projeto com calma, o prazo já apertou.</strong></p>
+      <p>Recorrer a uma IA genérica também não resolve sozinho: sem o contexto técnico certo, a resposta sai rasa — e você acaba gastando tempo corrigindo o que deveria ter economizado.</p>
+    </div>
+    <div class="compare">
+      <div class="compare-col no">
+        <h4>✕ Sem contexto técnico</h4>
+        <ul>
+          <li>Resposta genérica, sem seguir o padrão do seu escritório</li>
+          <li>Você precisa reescrever boa parte do texto</li>
+          <li>Não referencia a norma que o projeto exige</li>
+          <li>Cada tarefa começa do zero, sem um roteiro fixo</li>
+        </ul>
+      </div>
+      <div class="compare-col yes">
+        <h4>✓ Com as skills do CivilSkills</h4>
+        <ul>
+          <li>Instrução já traz as perguntas certas sobre o serviço</li>
+          <li>Estrutura de documento pronta para o seu caso</li>
+          <li>Você indica a norma e ela guia a resposta</li>
+          <li>Primeira versão organizada para revisar e assinar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="skills" style="background:var(--card)">
+  <div class="wrap">
+    <div class="skills-head center">
+      <div class="eyebrow">Skills técnicas</div>
+      <h2 style="margin-top:18px;font-size:2.1rem">Um roteiro pronto para cada frente do seu escritório.</h2>
+      <p class="muted" style="margin-top:10px">Abra cada frente de trabalho abaixo para ver as skills incluídas no CivilSkills.</p>
+      <button type="button" class="btn btn-orange pulse-btn" onclick="openAllSkills()" style="margin-top:24px">Ver todas as 50 skills <span class="arrow">↓</span></button>
+    </div>
+
+    <div class="accordion" id="accordion">
+      <details class="acc-item" open>
+        <summary>
+          <div class="acc-left"><span class="acc-num">01</span><div><h3>Projeto &amp; Cálculo Estrutural</h3><p>Do rascunho ao memorial técnico</p></div></div>
+          <div class="acc-right"><span class="acc-count">10 skills</span><span class="acc-plus">+</span></div>
+        </summary>
+        <div class="acc-body">
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><h4>Estruturas de Concreto Armado</h4><p>Dimensionamento de vigas, pilares e lajes segundo a NBR 6118.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><h4>Estruturas Metálicas</h4><p>Perfis, ligações e verificação de estabilidade conforme a NBR 8800.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-wrench"/></svg></span><div><h4>Estruturas de Madeira</h4><p>Dimensionamento de peças e ligações segundo a NBR 7190.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><h4>Alvenaria Estrutural</h4><p>Dimensionamento de blocos, prumadas e cargas conforme a NBR 16868.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-layers"/></svg></span><div><h4>Fundações</h4><p>Sapatas, blocos, estacas e capacidade de carga pela NBR 6122.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><h4>Lajes e Vigas Protendidas</h4><p>Pré-dimensionamento e perdas de protensão em elementos especiais.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-layers"/></svg></span><div><h4>Contenções e Muros de Arrimo</h4><p>Empuxo de terra, estabilidade global e drenagem de contenções.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span><div><h4>Análise Estrutural</h4><p>Interpretação de esforços, reações de apoio e verificação de modelos.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><h4>Pontes e Obras de Arte</h4><p>Pré-dimensionamento de vãos, aparelhos de apoio e memorial de cálculo.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Memoriais e Compatibilização</h4><p>Memorial de cálculo, compatibilização de projetos e revisão de plantas.</p></div></div>
+        </div>
+      </details>
+
+      <details class="acc-item">
+        <summary>
+          <div class="acc-left"><span class="acc-num">02</span><div><h3>Conformidade &amp; Laudos</h3><p>Normas, segurança e ART</p></div></div>
+          <div class="acc-right"><span class="acc-count">10 skills</span><span class="acc-plus">+</span></div>
+        </summary>
+        <div class="acc-body">
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-shield"/></svg></span><div><h4>Laudo de Vistoria Predial</h4><p>Relatório de conformidade e plano de ação para adequar a edificação.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Laudo de Patologias das Construções</h4><p>Diagnóstico de fissuras, infiltrações e recomendações de reparo.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-shield"/></svg></span><div><h4>Segurança do Trabalho em Obras</h4><p>PCMAT, APR e checklist de conformidade com a NR-18 e a NR-35.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Laudo Estrutural</h4><p>Estrutura de laudo de avaliação estrutural e análise de sinistros.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-shield"/></svg></span><div><h4>Acessibilidade</h4><p>Verificação de rotas acessíveis e dimensionamento pela NBR 9050.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-shield"/></svg></span><div><h4>Segurança contra Incêndio</h4><p>Rotas de fuga, hidrantes e memorial conforme normas do Corpo de Bombeiros.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Material de Treinamento</h4><p>Conteúdo de apoio para integração de obra e procedimentos internos.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span><div><h4>Perícia de Engenharia</h4><p>Estrutura de laudo pericial e análise de sinistros e divergências contratuais.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Memoriais e ART/RRT</h4><p>Memorial descritivo, memória de cálculo e regularização junto ao conselho.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Consulta a Normas</h4><p>Resumo prático de NBRs, NRs e códigos de obras para citar no laudo.</p></div></div>
+        </div>
+      </details>
+
+      <details class="acc-item">
+        <summary>
+          <div class="acc-left"><span class="acc-num">03</span><div><h3>Orçamento &amp; Planejamento</h3><p>Custos, prazos e viabilidade</p></div></div>
+          <div class="acc-right"><span class="acc-count">10 skills</span><span class="acc-plus">+</span></div>
+        </summary>
+        <div class="acc-body">
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Orçamento de Obra</h4><p>Composição de custos unitários, BDI e formação de preço em propostas.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span><div><h4>Levantamento de Quantitativos</h4><p>Quantificação de serviços a partir de projeto e planilha de insumos.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Cronograma Físico-Financeiro</h4><p>Curva S, EAP e sequenciamento de etapas da obra.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span><div><h4>Composições SINAPI</h4><p>Referência de insumos e composições de custo por serviço.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Viabilidade Econômica</h4><p>Payback, TIR, VPL e comparação entre cenários de investimento imobiliário.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Medição de Obra</h4><p>Boletim de medição, controle de avanço físico e financeiro.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Incorporação Imobiliária</h4><p>Estudo de viabilidade, tabela de vendas e memorial de incorporação.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span><div><h4>Gestão de Contratos</h4><p>Aditivos, reajuste e análise de cláusulas de contratos de obra.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Licitações e Editais</h4><p>Leitura de edital, planilha orçamentária e proposta técnica para concorrências públicas.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Due Diligence de Obra</h4><p>Checklist de documentação e conformidade para due diligence técnica.</p></div></div>
+        </div>
+      </details>
+
+      <details class="acc-item">
+        <summary>
+          <div class="acc-left"><span class="acc-num">04</span><div><h3>Geotecnia &amp; Infraestrutura</h3><p>Solo, drenagem e vias</p></div></div>
+          <div class="acc-right"><span class="acc-count">10 skills</span><span class="acc-plus">+</span></div>
+        </summary>
+        <div class="acc-body">
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-layers"/></svg></span><div><h4>Sondagem SPT</h4><p>Interpretação de boletim de sondagem e perfil de solo.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-layers"/></svg></span><div><h4>Mecânica dos Solos</h4><p>Capacidade de carga, recalques e estabilidade de taludes.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-wrench"/></svg></span><div><h4>Terraplenagem</h4><p>Cálculo de volumes de corte e aterro e plano de movimentação de terra.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-layers"/></svg></span><div><h4>Pavimentação</h4><p>Dimensionamento de pavimento flexível e rígido para vias e pátios.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span><div><h4>Drenagem Urbana</h4><p>Dimensionamento de galerias pluviais e dispositivos de macrodrenagem.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-layers"/></svg></span><div><h4>Saneamento Básico</h4><p>Redes de água e esgoto, estações elevatórias e memorial sanitário.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><h4>Loteamentos</h4><p>Infraestrutura de loteamento, memorial de arruamento e georreferenciamento.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span><div><h4>Estudo de Tráfego</h4><p>Dimensionamento viário e capacidade de interseções.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-layers"/></svg></span><div><h4>Impacto Ambiental</h4><p>Estrutura de EIA/RIMA e licenciamento ambiental de obras.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Topografia e Georreferenciamento</h4><p>Leitura de levantamento planialtimétrico e memorial de área e perímetro.</p></div></div>
+        </div>
+      </details>
+
+      <details class="acc-item">
+        <summary>
+          <div class="acc-left"><span class="acc-num">05</span><div><h3>Campo, Obra &amp; Comercial</h3><p>Execução e relacionamento</p></div></div>
+          <div class="acc-right"><span class="acc-count">10 skills</span><span class="acc-plus">+</span></div>
+        </summary>
+        <div class="acc-body">
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-wrench"/></svg></span><div><h4>Gestão de Obra</h4><p>Diário de obra, controle de equipes e cronograma de canteiro.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Controle de Qualidade</h4><p>Checklist de recebimento de materiais e inspeção de serviços executados.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Comissionamento</h4><p>Plano de testes, entrega técnica e relatório de habite-se.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Dossiê As-Built</h4><p>Atualização de projeto executado e organização do dossiê de entrega.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-wrench"/></svg></span><div><h4>Manutenção Predial</h4><p>Plano de manutenção preventiva e checklist de vistoria periódica.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Habite-se e Regularização</h4><p>Checklist documental para habite-se e regularização de edificações.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span><div><h4>Retrofit e Reformas</h4><p>Diagnóstico de edificação existente e escopo técnico de retrofit.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Atendimento Comercial</h4><p>Proposta, escopo e mensagens que ajudam a fechar o serviço.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Relacionamento com Cliente</h4><p>Follow-up, ata de reunião e comunicação sobre o andamento da obra.</p></div></div>
+          <div class="skill-row"><span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span><div><h4>Documentação Condominial</h4><p>Convenção, regimento e pareceres técnicos para síndicos e condomínios.</p></div></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="skills-cta">
+      <p>As 50 skills completas e os comandos avançados fazem parte do CivilSkills.</p>
+      <a href="#oferta" class="btn btn-orange" style="margin-top:16px">Saber mais <span class="arrow">→</span></a>
+      <p class="muted" style="margin-top:10px;font-size:12px">Pagamento único · 7 dias de garantia</p>
+    </div>
+  </div>
+</section>
+
+<section class="testi">
+  <div class="wrap center">
+    <div class="eyebrow">Quem já usa</div>
+    <h2 style="margin-top:20px;font-size:2.1rem">Relatos de quem levou o kit para dentro do escritório.</h2>
+    <div class="testi-viewport">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"A skill de memorial descritivo virou parte fixa do meu fluxo em projetos estruturais. O que tomava uma tarde inteira, hoje eu reviso em menos de uma hora."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/carlosmendes.webp" alt="Carlos Mendes">
+            <div><b>Carlos Mendes</b><span>Engenheiro Civil · Belo Horizonte/MG</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"Ganhei tempo para estruturar os laudos de vistoria predial. Continuo conferindo cada item em campo, mas o rascunho já chega organizado do jeito que entrego ao cliente."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/robertosilva.webp" alt="Roberto Silva">
+            <div><b>Roberto Silva</b><span>Engenheiro Civil · Curitiba/PR</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"A skill de orçamento padronizou as propostas do nosso escritório. Ficou bem mais simples comparar composições SINAPI e justificar o valor para o cliente."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/diegooliveira.webp" alt="Diego Oliveira">
+            <div><b>Diego Oliveira</b><span>Técnico em Edificações · Campinas/SP</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"Atendo obras residenciais pequenas, e os comandos prontos resolvem boa parte da correria: e-mail de cliente, ata de reunião, checklist de vistoria."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/julianasantos.webp" alt="Juliana Santos">
+            <div><b>Juliana Santos</b><span>Engenheira Civil · Recife/PE</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"Uso a skill de fundações como ponto de partida para interpretar o boletim de sondagem antes de fechar o projeto. Reduziu bastante o retrabalho na revisão."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/anapaula.webp" alt="Ana Paula">
+            <div><b>Ana Paula</b><span>Engenheira Civil · Porto Alegre/RS</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"As planilhas de bônus por si só já valeriam a pena. Uso a de cronograma toda semana para acompanhar o avanço físico das obras."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/fernandalima.webp" alt="Fernanda Lima">
+            <div><b>Fernanda Lima</b><span>Engenheira Civil · Salvador/BA</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prompts">
+  <div class="wrap center">
+    <div class="eyebrow">Biblioteca de comandos</div>
+    <h2 style="margin-top:20px;font-size:2.1rem">Comandos prontos para os pedidos avulsos que não param de chegar.</h2>
+    <p class="muted" style="max-width:640px;margin:14px auto 0">Enquanto as skills guiam as tarefas recorrentes, os comandos resolvem pedidos pontuais: um parecer, uma resposta a cliente, um resumo de reunião de obra.</p>
+    <div class="chip-cloud">
+      <span><svg class="ico"><use href="#i-doc"/></svg> Parecer técnico</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> E-mail de cobrança</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Ata de reunião de obra</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Checklist de vistoria</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Argumentação técnica</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Comparativo de propostas</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Resposta a fiscalização</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Descrição de escopo</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Relatório executivo</span>
+      <span><svg class="ico"><use href="#i-doc"/></svg> Revisão de contrato</span>
+      <span style="background:rgba(232,87,44,.12);border-color:rgba(232,87,44,.4);color:var(--orange)">✨ E muito mais</span>
+    </div>
+    <p class="muted" style="max-width:640px;margin:26px auto 0;font-size:13px">990 outros comandos cobrindo comunicação com fornecedor, negociação de prazo, aprovação em prefeitura e muito mais.</p>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:30px">Saber mais <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="steps" style="background:var(--bg)">
+  <div class="wrap center">
+    <h2 style="font-size:2.1rem">Do acesso à primeira entrega, em três movimentos.</h2>
+    <p class="muted">O CivilSkills traz conteúdos ilustrados para acompanhar a configuração desde o início.</p>
+    <div class="timeline">
+      <div class="t-step"><div class="t-node">1</div><h4>Entre no Claude</h4><p>Acesse sua conta e confira os requisitos indicados no guia de configuração.</p></div>
+      <div class="t-step"><div class="t-node">2</div><h4>Ative a skill certa</h4><p>Escolha a skill da tarefa e siga o passo a passo de configuração incluso.</p></div>
+      <div class="t-step"><div class="t-node">3</div><h4>Envie os dados do serviço</h4><p>Descreva a tarefa, informe os dados necessários e revise a resposta antes de usar.</p></div>
+    </div>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:44px">Eu quero o CivilSkills <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="bonus center">
+  <div class="wrap">
+    <div class="eyebrow">Junto com o CivilSkills</div>
+    <h2 style="margin-top:20px">Quatro materiais de apoio para <em>tirar do papel mais rápido.</em></h2>
+    <p class="lead">Planilhas, agentes e um modelo de prompt para o seu dia a dia com o Claude.</p>
+    <div class="bonus-rows">
+      <div class="bonus-row">
+        <span class="b-bignum">01</span>
+        <div class="b-media"><img src="assets/bonus1.webp" alt="Planilha de Orçamento, Quantitativos e BDI"></div>
+        <div class="b-text">
+          <span class="b-index">Bônus 1</span>
+          <span class="pill">Planilha</span>
+          <h4>Planilha de Orçamento, Quantitativos e BDI</h4>
+          <p>Insira os dados do serviço e receba um pré-orçamento com quantitativos, custos e formação de preço para conferir.</p>
+        </div>
+      </div>
+      <div class="bonus-row rev">
+        <span class="b-bignum">02</span>
+        <div class="b-media"><img src="assets/bonus2.webp" alt="Planilha de Cronograma, Medição e Controle da Obra"></div>
+        <div class="b-text">
+          <span class="b-index">Bônus 2</span>
+          <span class="pill">Planilha</span>
+          <h4>Cronograma, Medição e Controle da Obra</h4>
+          <p>Organize prazos, avanço físico-financeiro e medições da obra em um só arquivo.</p>
+        </div>
+      </div>
+      <div class="bonus-row">
+        <span class="b-bignum">03</span>
+        <div class="b-media"><img src="assets/bonus3.webp" alt="Agentes para Engenharia Civil"></div>
+        <div class="b-text">
+          <span class="b-index">Bônus 3</span>
+          <span class="pill">Fluxo de agentes</span>
+          <h4>Agentes para Engenharia Civil</h4>
+          <p>Sequências prontas de análise, orçamento, planejamento e documentação para tarefas que se repetem toda semana.</p>
+        </div>
+      </div>
+      <div class="bonus-row rev">
+        <span class="b-bignum">04</span>
+        <div class="b-media"><img src="assets/bonus4.png" alt="Prompt Mestre de Engenharia Civil"></div>
+        <div class="b-text">
+          <span class="b-index">Bônus 4</span>
+          <span class="pill">Modelo de prompt</span>
+          <h4>Prompt Mestre de Engenharia Civil</h4>
+          <p>Um modelo para organizar objetivo, contexto, dados de entrada e formato de saída sempre que for montar um pedido do zero.</p>
+        </div>
+      </div>
+    </div>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:48px">Eu quero o CivilSkills <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="conteudos" style="background:var(--card)">
+  <div class="wrap center">
+    <div class="eyebrow">Inclusos no CivilSkills</div>
+    <h2 style="margin-top:20px;font-size:2.1rem">Conteúdos para você não travar na primeira etapa.</h2>
+    <p class="muted">Três conteúdos práticos para acompanhar a instalação das skills e aplicar o método no primeiro atendimento.</p>
+    <div class="conteudos-track">
+      <div class="cont-card">
+        <img src="assets/aula1.webp" alt="Primeiros passos no CivilSkills">
+        <div class="body"><span class="num">Conteúdo 1</span><h4>Primeiros Passos</h4><p>Como acessar o kit e organizar o ambiente antes da primeira tarefa.</p></div>
+      </div>
+      <div class="cont-card">
+        <img src="assets/aula2.png" alt="Instalação das skills">
+        <div class="body"><span class="num">Conteúdo 2</span><h4>Instalando as Skills</h4><p>Passo a passo de configuração de cada skill dentro do Claude.</p></div>
+      </div>
+      <div class="cont-card">
+        <img src="assets/aula3.webp" alt="Critério técnico ao usar o Claude">
+        <div class="body"><span class="num">Conteúdo 3</span><h4>Critério Técnico</h4><p>Como escrever o pedido, dar contexto e revisar o que for gerado.</p></div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:12px;margin-top:6px">Deslize para conferir os outros conteúdos →</p>
+  </div>
+</section>
+
+<div id="oferta" class="offer">
+  <section class="center">
+    <div class="wrap">
+      <h2>Dois formatos de acesso, <em>o mesmo método por trás.</em></h2>
+      <p>Comece pelo essencial ou já entre com o kit completo — pagamento único, sem mensalidade.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <h3>Pacote Simples</h3>
+          <p class="desc">Para testar o método nas tarefas mais recorrentes do escritório.</p>
+          <div class="price-value"><span class="cur">R$</span><span class="num">10</span></div>
+          <p class="price-note">pagamento único · acesso imediato · PIX ou cartão</p>
+          <div class="price-pills">
+            <span><svg class="ico"><use href="#i-check"/></svg> 15 skills essenciais</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> 200 comandos prontos</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> Guia de configuração</span>
+            <span class="off"><svg class="ico"><use href="#i-check"/></svg> Conteúdos passo a passo</span>
+            <span class="off"><svg class="ico"><use href="#i-check"/></svg> Materiais bônus</span>
+          </div>
+          <a href="#" class="btn btn-outline btn-block">Quero o pacote simples</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="price-badge">Mais escolhido</span>
+          <h3>Pacote Completo</h3>
+          <p class="desc">Todas as skills, os comandos, os bônus e os conteúdos de apoio.</p>
+          <div class="price-value"><span class="cur">R$</span><span class="num">27</span></div>
+          <p class="price-note">pagamento único · acesso de 1 ano ao app · PIX ou cartão</p>
+          <div class="price-pills">
+            <span><svg class="ico"><use href="#i-check"/></svg> 50 skills técnicas</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> 1000 comandos prontos</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> 3 conteúdos de configuração</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> Planilha de orçamento e BDI</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> Planilha de cronograma e medição</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> Agentes para engenharia civil</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> Prompt mestre</span>
+            <span><svg class="ico"><use href="#i-check"/></svg> Atualizações do pacote</span>
+          </div>
+          <a href="#" class="btn btn-teal btn-block">Quero o pacote completo</a>
+        </div>
+      </div>
+
+      <p class="fine2" style="margin-top:26px">A licença de uso do Claude é contratada à parte, diretamente com a Anthropic.</p>
+    </div>
+  </section>
+</div>
+
+<section class="guarantee" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="guarantee-card">
+      <div class="guarantee-badge"><svg class="ico" style="width:32px;height:32px"><use href="#i-shield"/></svg></div>
+      <h3>7 dias para decidir com calma</h3>
+      <p class="muted">Acesse o pacote e teste as skills nas suas próprias tarefas. Se não fizer sentido para você, é só pedir o reembolso pelo canal informado na compra, dentro de 7 dias.</p>
+      <a href="#oferta" class="btn btn-orange" style="margin-top:20px">Quero testar o pacote <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="statement" style="background:var(--card)">
+  <div class="wrap">
+    <h2>O Claude prepara a base. Quem conduz o projeto é você.</h2>
+    <p>O kit organiza instruções para apoiar a preparação de documentos e outras tarefas recorrentes da engenharia civil.</p>
+    <p>Você continua fornecendo os dados, conferindo cálculos e referências normativas, e ajustando cada resposta ao seu projeto.</p>
+    <p class="strong">A análise técnica e a responsabilidade profissional continuam sendo do engenheiro habilitado.</p>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap center">
+    <h2 style="font-size:2.1rem">Perguntas frequentes</h2>
+    <div class="faq-list" style="text-align:left">
+      <details class="q"><summary>Qual a diferença entre o Pacote Simples e o Completo?<span class="qplus">+</span></summary><p>O Simples (R$10) traz 15 skills essenciais e 200 comandos, para você testar o método. O Completo (R$27) inclui as 50 skills, os 1000 comandos, os 4 materiais bônus e os 3 conteúdos de configuração.</p></details>
+      <details class="q"><summary>Preciso ter experiência com inteligência artificial?<span class="qplus">+</span></summary><p>Não. O guia de configuração explica o passo a passo, e cada skill já vem com o contexto necessário para orientar o Claude.</p></details>
+      <details class="q"><summary>O que exatamente eu recebo na compra?<span class="qplus">+</span></summary><p>Acesso digital imediato às skills e à biblioteca de comandos e, no pacote Completo, também aos materiais bônus e aos conteúdos de configuração.</p></details>
+      <details class="q"><summary>As skills funcionam em qualquer conta do Claude?<span class="qplus">+</span></summary><p>As skills são configuradas dentro do Claude, da Anthropic, seguindo o passo a passo incluído no pacote.</p></details>
+      <details class="q"><summary>O valor do pacote inclui a assinatura do Claude?<span class="qplus">+</span></summary><p>Não. A licença de uso do Claude é contratada separadamente, direto com a Anthropic.</p></details>
+      <details class="q"><summary>Serve para quem trabalha sozinho, sem escritório montado?<span class="qplus">+</span></summary><p>Sim. O material foi pensado para engenheiros, técnicos, autônomos e escritórios de projeto, obra e gestão predial.</p></details>
+      <details class="q"><summary>Preciso revisar o que o Claude gerar?<span class="qplus">+</span></summary><p>Sim, sempre. O resultado é um ponto de partida — a conferência técnica e a validação final continuam sendo suas.</p></details>
+      <details class="q"><summary>Como recebo o acesso depois de comprar?<span class="qplus">+</span></summary><p>Após a confirmação do pagamento, você recebe o acesso e as instruções de configuração por e-mail.</p></details>
+      <details class="q"><summary>Como funciona o pedido de reembolso?<span class="qplus">+</span></summary><p>Basta entrar em contato pelo canal informado na confirmação da compra, dentro do prazo de 7 dias.</p></details>
+    </div>
+    <a href="#oferta" class="btn btn-orange" style="margin-top:40px">Saber mais <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<section class="final-cta center">
+  <div class="wrap">
+    <h2>Seu próximo memorial <em>não precisa começar em branco.</em></h2>
+    <p>Escolha o pacote que faz sentido para o seu momento — a partir de R$10 — e leve o kit para a próxima tarefa.</p>
+    <a href="#oferta" class="btn btn-orange">Eu quero o CivilSkills <span class="arrow">→</span></a>
+    <p class="fine2" style="margin-top:20px">Acesso digital imediato · Pagamento único · Garantia de 7 dias</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-logo"><img src="assets/logo.png" alt="CivilSkills"></div>
+    <p>O CivilSkills é um produto digital de acesso imediato que disponibiliza instruções de configuração (skills) e comandos prontos para uso no Claude, da Anthropic, voltados à engenharia civil. Os resultados variam conforme o uso e os dados fornecidos. O material não substitui o julgamento técnico do profissional habilitado nem a responsabilidade legal ligada à ART/RRT. Este produto não possui vínculo institucional com a Anthropic.</p>
+    <p class="copy">© 2026 CivilSkills · Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  var words = ["NBR 6118","NBR 8800","NBR 6122","NR-18","ORÇAMENTO SINAPI","MEMORIAL DE CÁLCULO","CRONOGRAMA DE OBRA","LAUDO ESTRUTURAL","FUNDAÇÕES","ART/RRT","SONDAGEM SPT","COMANDOS PRONTOS"];
+  var html = words.map(function(w){return "<span>"+w+"</span>"}).join("");
+  document.getElementById("marquee").innerHTML = html + html;
+
+  function openAllSkills(){
+    document.querySelectorAll('#accordion .acc-item').forEach(function(d){ d.open = true; });
+    var el = document.getElementById('accordion');
+    if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  var testiTrack = document.getElementById('testiTrack');
+  if(testiTrack){ testiTrack.innerHTML += testiTrack.innerHTML; }
+</script>
+</body>
+</html>
