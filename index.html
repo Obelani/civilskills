@@ -167,16 +167,19 @@
   .skills-cta{margin-top:44px;border-radius:16px;border:1px solid rgba(232,171,31,.4);background:var(--card);padding:32px;text-align:center}
   .skills-cta p{font-weight:700;font-size:1.1rem}
 
-  /* applications / testimonials-style track */
+  /* testimonials */
   .testi{background:var(--bg)}
   .testi-viewport{overflow:hidden;margin-top:44px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
   .testi-track{display:flex;gap:20px;width:max-content;animation:testiScroll 38s linear infinite}
   .testi-viewport:hover .testi-track{animation-play-state:paused}
   @keyframes testiScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .testi-card{flex:0 0 300px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;text-align:left}
-  .app-card{display:flex;flex-direction:column;gap:16px;align-items:flex-start;justify-content:flex-start;min-height:120px}
-  .app-card .s-ico{width:44px;height:44px;border-radius:12px;background:rgba(232,171,31,.14);color:var(--teal-dark);display:grid;place-items:center;font-size:20px}
-  .app-card h4{font-size:15px;font-weight:700;line-height:1.35}
+  .testi-card{flex:0 0 320px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;text-align:left}
+  .testi-rating{display:inline-flex;align-items:center;gap:6px;background:rgba(232,87,44,.1);color:var(--orange);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:800}
+  .testi-card p.quote{margin-top:16px;font-size:14px;color:var(--text)}
+  .testi-person{margin-top:18px;display:flex;align-items:center;gap:12px;border-top:1px solid var(--border);padding-top:16px}
+  .testi-person img{width:42px;height:42px;border-radius:10px;object-fit:cover}
+  .testi-person b{display:block;font-size:13px}
+  .testi-person span{display:block;font-size:11px;color:var(--muted)}
 
   /* prompts as chips */
   .prompts{background:var(--card)}
@@ -207,8 +210,6 @@
   .bonus-row.rev .b-bignum{right:auto;left:0}
   .b-media{width:200px;height:240px;flex:none;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border-radius:16px;overflow:hidden}
   .b-media img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:10px;box-shadow:0 20px 40px rgba(0,0,0,.4)}
-  .b-media.pending{border:1px dashed rgba(255,255,255,.3);flex-direction:column;gap:10px;padding:18px;text-align:center;color:rgba(255,255,255,.6);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-  .b-media.pending svg{width:26px;height:26px;color:var(--teal)}
   .b-text .b-index{display:block;font-family:'Sora',sans-serif;font-weight:800;color:var(--teal);font-size:15px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
   .b-text .pill{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;background:rgba(232,171,31,.16);color:var(--teal);padding:4px 12px;border-radius:999px}
   .b-text h4{margin-top:12px;font-size:1.25rem}
@@ -521,34 +522,57 @@
 
 <section class="testi">
   <div class="wrap center">
-    <div class="eyebrow">No dia a dia do escritório</div>
-    <h2 style="margin-top:20px;font-size:2.1rem">Aplicações do CivilSkills na rotina</h2>
-    <p class="muted" style="max-width:640px;margin:14px auto 0">Exemplos de como as skills apoiam tarefas recorrentes de quem projeta, orça, executa e acompanha obras.</p>
+    <div class="eyebrow">Quem já usa</div>
+    <h2 style="margin-top:20px;font-size:2.1rem">Relatos de quem levou o kit para dentro do escritório.</h2>
     <div class="testi-viewport">
-      <div class="testi-track" id="appTrack">
-        <div class="testi-card app-card">
-          <span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span>
-          <h4>Estruturação de memoriais e relatórios</h4>
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"A skill de memorial descritivo virou parte fixa do meu fluxo de documentação técnica. O que tomava uma tarde inteira, hoje eu reviso em menos de uma hora."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/carlosmendes.webp" alt="Carlos Mendes">
+            <div><b>Carlos Mendes</b><span>Engenheiro Civil · Belo Horizonte/MG</span></div>
+          </div>
         </div>
-        <div class="testi-card app-card">
-          <span class="s-ico"><svg class="ico"><use href="#i-cpu"/></svg></span>
-          <h4>Organização de quantitativos e orçamentos</h4>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"Ganhei tempo para estruturar os relatórios de vistoria técnica. Continuo conferindo cada item em campo, mas o rascunho já chega organizado do jeito que entrego ao cliente."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/robertosilva.webp" alt="Roberto Silva">
+            <div><b>Roberto Silva</b><span>Engenheiro Civil · Curitiba/PR</span></div>
+          </div>
         </div>
-        <div class="testi-card app-card">
-          <span class="s-ico"><svg class="ico"><use href="#i-doc"/></svg></span>
-          <h4>Preparação de RDO e atas de reunião</h4>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"A skill de orçamento analítico organizou as propostas do nosso escritório. Ficou bem mais simples estruturar o BDI e justificar o valor para o cliente."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/diegooliveira.webp" alt="Diego Oliveira">
+            <div><b>Diego Oliveira</b><span>Técnico em Edificações · Campinas/SP</span></div>
+          </div>
         </div>
-        <div class="testi-card app-card">
-          <span class="s-ico"><svg class="ico"><use href="#i-clock"/></svg></span>
-          <h4>Controle de medições e avanço físico</h4>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"Atendo obras residenciais pequenas, e os comandos prontos resolvem boa parte da correria: e-mail de cliente, ata de reunião de obra, checklist de vistoria."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/julianasantos.webp" alt="Juliana Santos">
+            <div><b>Juliana Santos</b><span>Engenheira Civil · Recife/PE</span></div>
+          </div>
         </div>
-        <div class="testi-card app-card">
-          <span class="s-ico"><svg class="ico"><use href="#i-check"/></svg></span>
-          <h4>Checklists de inspeção e entrega</h4>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"Uso a skill de levantamento de quantitativos como ponto de partida antes de fechar o orçamento. Reduziu bastante o retrabalho na revisão."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/anapaula.webp" alt="Ana Paula">
+            <div><b>Ana Paula</b><span>Engenheira Civil · Porto Alegre/RS</span></div>
+          </div>
         </div>
-        <div class="testi-card app-card">
-          <span class="s-ico"><svg class="ico"><use href="#i-building"/></svg></span>
-          <h4>Padronização da documentação do escritório</h4>
+        <div class="testi-card">
+          <span class="testi-rating"><svg class="ico"><use href="#i-badge"/></svg> 5,0</span>
+          <p class="quote">"As planilhas de bônus por si só já valeriam a pena. Uso a de cronograma e medição toda semana para acompanhar o avanço físico das obras."</p>
+          <div class="testi-person">
+            <img src="assets/depoimentos/fernandalima.webp" alt="Fernanda Lima">
+            <div><b>Fernanda Lima</b><span>Engenheira Civil · Salvador/BA</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -629,10 +653,7 @@
       </div>
       <div class="bonus-row rev">
         <span class="b-bignum">04</span>
-        <div class="b-media pending">
-          <svg class="ico"><use href="#i-clock"/></svg>
-          <span>Imagem do Bônus 4 pendente de envio</span>
-        </div>
+        <div class="b-media"><img src="assets/bonus4.webp" alt="Prompt Mestre de Engenharia Civil"></div>
         <div class="b-text">
           <span class="b-index">Bônus 4</span>
           <span class="pill">Modelo de prompt</span>
@@ -782,8 +803,8 @@
     if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
   }
 
-  var appTrack = document.getElementById('appTrack');
-  if(appTrack){ appTrack.innerHTML += appTrack.innerHTML; }
+  var testiTrack = document.getElementById('testiTrack');
+  if(testiTrack){ testiTrack.innerHTML += testiTrack.innerHTML; }
 
   document.addEventListener('DOMContentLoaded', function(){
     var cfg = window.CIVILSKILLS_CONFIG || {};
