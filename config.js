@@ -15,10 +15,8 @@
  * de checkout apontam para a seção de preços em vez de um link quebrado).
  */
 window.CIVILSKILLS_CONFIG = {
-  // ID do Meta Pixel (ex.: "1234567890123456"). Corresponde a META_PIXEL_ID no .env.example.
-  // Ainda pendente — o Pixel já está preparado no <head> do index.html e só é
-  // inicializado quando este valor deixar de ser null.
-  metaPixelId: null,
+  // ID do Meta Pixel. Corresponde a META_PIXEL_ID no .env.example.
+  metaPixelId: "1795534648134308",
 
   // URL de checkout do Pacote Simples (R$10), criada na Mivvo. Corresponde a CHECKOUT_URL_SIMPLES.
   checkoutUrlSimples: "https://app.mivvo.io/checkout/rpdqf0ymu1qkynz",
