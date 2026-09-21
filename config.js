@@ -19,8 +19,8 @@ window.CIVILSKILLS_CONFIG = {
   metaPixelId: "1795534648134308",
 
   // URL de checkout do Pacote Simples (R$10), criada na Mivvo. Corresponde a CHECKOUT_URL_SIMPLES.
-  checkoutUrlSimples: "https://app.mivvo.io/checkout/rpdqf0ymu1qkynz",
+  checkoutUrlSimples: "https://app.mivvo.com.br/checkout/9e693ed2-47ef-4f29-a00b-9c3bfe5e4742",
 
   // URL de checkout do Pacote Completo (R$27,90), criada na Mivvo. Corresponde a CHECKOUT_URL_COMPLETO.
-  checkoutUrlCompleto: "https://app.mivvo.io/checkout/uz314uemu1qlop1"
+  checkoutUrlCompleto: "https://app.mivvo.com.br/checkout/7984bb8e-2a40-476d-9a2a-883f88c6976a"
 };
